@@ -26,6 +26,9 @@ public class Animal : MonoBehaviour
     private double size = 1f;
 
 
+    public Collider[] objs;
+    public Collider[] objs2;
+
     private int rotationDir;
 
     void Start()
@@ -89,7 +92,7 @@ public class Animal : MonoBehaviour
 
     void FindFood()
     {
-        RaycastHit hit;
+        /*RaycastHit hit;
         if (UnityEngine.Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, senceRadius, groundLayer))
         {
             myAgent.SetDestination(hit.point);
@@ -100,12 +103,17 @@ public class Animal : MonoBehaviour
                 transform.Rotate(0, yAngle, 0, Space.Self);
             else
                 transform.Rotate(0, -yAngle, 0, Space.Self);
-        }
+        }*/
+
+        //Collider[] objs;
+        objs = Physics.OverlapSphere(transform.position + Vector3.up, 10, groundLayer);
+        if(objs.Length > 0)
+        myAgent.SetDestination(objs[0].transform.position);
     }
 
     void FindToReprodce()
     {
-        RaycastHit hit;
+        /*RaycastHit hit;
         if (UnityEngine.Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, senceRadius, animalLayer))
         {
             exit = true;
@@ -117,6 +125,14 @@ public class Animal : MonoBehaviour
                 transform.Rotate(0, yAngle, 0, Space.Self);
             else
                 transform.Rotate(0, -yAngle, 0, Space.Self);
+        }
+        */
+        
+        objs2 = Physics.OverlapSphere(transform.position + Vector3.up, 10, animalLayer);
+        if (objs2.Length > 0)
+        {
+            exit = true;
+            myAgent.SetDestination(objs2[0].transform.position);
         }
     }
 
