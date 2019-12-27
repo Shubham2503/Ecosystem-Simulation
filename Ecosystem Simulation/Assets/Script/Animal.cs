@@ -129,10 +129,10 @@ public class Animal : MonoBehaviour
         */
         
         objs2 = Physics.OverlapSphere(transform.position + Vector3.up, 10, animalLayer);
-        if (objs2.Length > 0)
+        if (objs2.Length > 1)
         {
             exit = true;
-            myAgent.SetDestination(objs2[0].transform.position);
+            myAgent.SetDestination(objs2[1].transform.position);
         }
     }
 

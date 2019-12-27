@@ -105,11 +105,11 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 9.3
+  m_Speed: 5.11
   m_Acceleration: 7.97
   avoidancePriority: 50
-  m_AngularSpeed: 119.18
-  m_StoppingDistance: 0.23
+  m_AngularSpeed: 89.41
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -140,9 +140,8 @@ MonoBehaviour:
   obj: {fileID: 8169145718241220019}
   reproduceErge: 0
   age: 0
-  exit: 0
-  localScaleVal: 0.1
-  size: 1
+  objs: []
+  objs2: []
 --- !u!54 &2611707148523176095
 Rigidbody:
   m_ObjectHideFlags: 0
