@@ -25,9 +25,9 @@ public class Spawner : MonoBehaviour
     {
         obj = objectToPlace2;
         // terrain size x
-        terrainWidth = (int)100/2;
+        terrainWidth = (int)200/2;
         // terrain size z
-        terrainLength = (int)100/2;
+        terrainLength = (int)200/2;
         // terrain x position
         terrainPosX = (int)terrain.transform.position.x;
         // terrain z position

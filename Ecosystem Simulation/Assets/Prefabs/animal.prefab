@@ -136,7 +136,7 @@ MonoBehaviour:
   animalLayer:
     serializedVersion: 2
     m_Bits: 512
-  senceRadius: 20
+  senceRadius: 50
   obj: {fileID: 8169145718241220019}
   reproduceErge: 0
   age: 0

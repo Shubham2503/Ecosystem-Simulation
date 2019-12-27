@@ -9,12 +9,12 @@ public class Manager : MonoBehaviour
 
     public int animal;
     public int food;
+    public int numberOfNodeInGraph = 20;
 
     private int k;
     public List<int> list;
     public List<int> list2;
 
-    public int numberOfNodeInGraph = 20;
 
     public Window_Graph g;
     public Window_Graph g2;
