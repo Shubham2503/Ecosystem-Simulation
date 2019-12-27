@@ -14,6 +14,8 @@ public class Manager : MonoBehaviour
     public List<int> list;
     public List<int> list2;
 
+    public int numberOfNodeInGraph = 20;
+
     public Window_Graph g;
     public Window_Graph g2;
 
@@ -34,8 +36,8 @@ public class Manager : MonoBehaviour
         {
             list.Add(animal);
             list2.Add(food);
-            g.ShowGraph(list,20, (int _i) => "Day " + (_i + 1), (float _f) => "Rabbits " + Mathf.RoundToInt(_f));
-            g2.ShowGraph(list2,20, (int _i) => "Day " + (_i + 1), (float _f) => "food " + Mathf.RoundToInt(_f));
+            g.ShowGraph(list, numberOfNodeInGraph, (int _i) => "Day " + (_i + 1), (float _f) => "Rabbits " + Mathf.RoundToInt(_f));
+            g2.ShowGraph(list2, numberOfNodeInGraph, (int _i) => "Day " + (_i + 1), (float _f) => "food " + Mathf.RoundToInt(_f));
             k = 0;
         }
 
