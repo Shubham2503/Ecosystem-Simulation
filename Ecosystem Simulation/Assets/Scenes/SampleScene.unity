@@ -803,8 +803,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   terrain: {fileID: 940163857}
-  numberOfObjects1: 5000
-  numberOfObjects2: 100
+  numberOfObjects1: 500
+  numberOfObjects2: 20
   objectToPlace1: {fileID: 3727281718277207201, guid: ae799ab42662e514fb314b95c3e4d936,
     type: 3}
   objectToPlace2: {fileID: 8169145718241220019, guid: 3786445f03b1b8343be9d5c542771d25,

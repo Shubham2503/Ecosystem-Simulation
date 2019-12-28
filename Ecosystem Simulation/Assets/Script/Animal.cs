@@ -7,6 +7,10 @@ using UnityEngine.AI;
 public class Animal : MonoBehaviour
 {
     public double hunger = 0;
+
+    public bool isFindingFood = false;
+    public bool isFindingMate = false;
+
     public LayerMask groundLayer;
     public LayerMask animalLayer;
     public int senceRadius = 100;
@@ -31,6 +35,8 @@ public class Animal : MonoBehaviour
 
     private int rotationDir;
 
+    private Vector3 pos;
+
     void Start()
     {
         myAgent = GetComponent <NavMeshAgent> ();
@@ -50,7 +56,7 @@ public class Animal : MonoBehaviour
         {
             kill();
         }
-        else if (hunger >= criticleVal && hunger < finalVal)
+        else if (hunger >= criticleVal && hunger < finalVal && !isFindingFood && !isFindingMate)
         {
             FindFood();
         }
@@ -70,10 +76,13 @@ public class Animal : MonoBehaviour
         }
 
 
-        if(age > 70 && reproduceErge > reproduceErgeCriticleval && hunger <= 250)
+        if(age > 70 && reproduceErge > reproduceErgeCriticleval && hunger <= 250 && !isFindingFood && !isFindingMate)
         {
             FindToReprodce();
         }
+
+
+
 
     }
 
@@ -106,9 +115,15 @@ public class Animal : MonoBehaviour
         }*/
 
         //Collider[] objs;
+        isFindingFood = true;
         objs = Physics.OverlapSphere(transform.position + Vector3.up, 10, groundLayer);
-        if(objs.Length > 0)
-        myAgent.SetDestination(objs[0].transform.position);
+        pos = transform.position;
+        if (objs.Length > 0)
+            pos = objs[0].transform.position;
+
+
+        myAgent.SetDestination(pos);
+
     }
 
     void FindToReprodce()
@@ -128,11 +143,14 @@ public class Animal : MonoBehaviour
         }
         */
         
+
         objs2 = Physics.OverlapSphere(transform.position + Vector3.up, 10, animalLayer);
         if (objs2.Length > 1)
         {
+            isFindingMate = true;
             exit = true;
-            myAgent.SetDestination(objs2[1].transform.position);
+            pos = objs2[1].transform.position;
+            myAgent.SetDestination(pos);
         }
     }
 
@@ -155,6 +173,7 @@ public class Animal : MonoBehaviour
         if (other.tag == "food")
         {
             hunger -= 100;
+            isFindingFood = false;
         }
     }
 }
