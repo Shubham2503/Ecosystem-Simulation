@@ -7,6 +7,9 @@ using UnityEngine.AI;
 public class Animal : MonoBehaviour
 {
     public double hunger = 0;
+
+    //public AnimationControl anm;
+
     public LayerMask groundLayer;
     public LayerMask animalLayer;
     public int senceRadius = 100;
@@ -48,6 +51,7 @@ public class Animal : MonoBehaviour
 
         if (hunger >= finalVal)
         {
+           
             kill();
         }
         else if (hunger >= criticleVal && hunger < finalVal)
@@ -58,6 +62,7 @@ public class Animal : MonoBehaviour
         {
             //Vector3 position = new Vector3(Random.Range(-1.0f, 1.0f), 0, Random.Range(-1.0f, 1.0f));
             //transform.Translate(position, Space.Self);
+            //anm.SetAnimationIdle();
         }
 
         if(age > 50)
@@ -79,6 +84,7 @@ public class Animal : MonoBehaviour
 
     void Move()
     {
+        
         Vector3 position = new Vector3(Random.Range(-10f, 10f), 0, Random.Range(-1.0f, 1.0f));
         transform.Translate(position, Space.Self);
     }
@@ -106,6 +112,9 @@ public class Animal : MonoBehaviour
         }*/
 
         //Collider[] objs;
+
+
+        //anm.SetAnimation("isWalking");
         objs = Physics.OverlapSphere(transform.position + Vector3.up, 10, groundLayer);
         if(objs.Length > 0)
         myAgent.SetDestination(objs[0].transform.position);
