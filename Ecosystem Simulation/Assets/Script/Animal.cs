@@ -9,11 +9,12 @@ public class Animal : MonoBehaviour
     public double hunger = 0;
 
     //values to interact
+    public float speed = 5f;
     public Vector3 pos;
     public bool foodFound = false;
     public bool goingTowardsMate = false;
-
-
+    public bool foundMate = false;
+    public float stopingDistt = 1f;
 
     public LayerMask groundLayer;
     public LayerMask animalLayer;
@@ -31,7 +32,7 @@ public class Animal : MonoBehaviour
     //Settings:
     private float criticleVal = 100;
     private int finalVal = 500;
-    private float yAngle = 1f;
+    //private float yAngle = 1f;
     private NavMeshAgent myAgent;
     private bool exit = false;
     private int reproduceErgeCriticleval = 150;
@@ -58,21 +59,23 @@ public class Animal : MonoBehaviour
         reproduceErge += 0.5;
 
 
-        if (hunger >= finalVal && false)
+        if (hunger >= finalVal)
         {
             kill();
         }
         else if(hunger >= criticleVal + 150 && !foodFound)
         {
-            //FindFood();
+            goingTowardsMate = false;
+            FindFood();
         }
         else if (hunger >= criticleVal && !foodFound && !goingTowardsMate)
         {
-            //FindFood();
+            FindFood();
         }
         //else if(age > 70 && reproduceErge > reproduceErgeCriticleval && !goingTowardsMate)
-        else if(age > 20  && !goingTowardsMate)
+        else if(age > 70  && !goingTowardsMate && reproduceErge > reproduceErgeCriticleval)
         {
+            foodFound = false;
             FindToReprodce();
         }
         else////////////////////////////////change///////////////////////////////.............................................................................
@@ -90,17 +93,38 @@ public class Animal : MonoBehaviour
             }
         }
 
+        if(foodFound && goingTowardsMate)
+        {
+            foodFound = false;
+            goingTowardsMate = false;
+        }
 
-        if(age > 70 && reproduceErge > reproduceErgeCriticleval && hunger <= 250)
+        /*if(age > 70 && reproduceErge > reproduceErgeCriticleval && hunger <= 250)
         {
             //FindToReprodce();
+        }*/
+
+        if(dist(transform.position,pos) <1f)
+        {
+            foodFound = false;
         }
 
 
         if (nearestPlanet2 != null && goingTowardsMate)
         {
-            transform.position = Vector3.MoveTowards(transform.position, nearestPlanet2.transform.position, 1.0f * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, nearestPlanet2.transform.position, speed * Time.deltaTime);
+            if(dist(transform.position , nearestPlanet2.transform.position) < stopingDistt)
+            {
+                nearestPlanet2 = null;
+                goingTowardsMate = false;
+                foundMate = true;
+            }
 
+        }
+        else if(nearestPlanet2 == null)
+        {
+            goingTowardsMate = false;
+            foundMate = false;
         }
 
 
@@ -121,6 +145,18 @@ public class Animal : MonoBehaviour
             foodFound = false;
         }
 
+        if(foundMate)
+        {
+            Reproduce();
+        }
+
+    }
+
+    void Reproduce()
+    {
+        Spawner.Spawn(transform.position.x, transform.position.z);
+        reproduceErge = 0;
+        foundMate = false;
     }
 
     /*void Move()
@@ -182,7 +218,7 @@ public class Animal : MonoBehaviour
         //transform.position = Vector3.MoveTowards(transform.position, target.position, step);
 
 
-        objs2 = Physics.OverlapSphere(transform.position, 100, animalLayer);
+        objs2 = Physics.OverlapSphere(transform.position, senceRadius, animalLayer);
 
         if (objs2.Length > 1)
         {
@@ -209,11 +245,14 @@ public class Animal : MonoBehaviour
                 }
             }
 
-            exit = true;
             if (nearestPlanet2 != null)
             {
-                pos = nearestPlanet2.transform.position;
-                goingTowardsMate = true;
+                //pos = nearestPlanet2.transform.position;
+                if (dist(transform.position, nearestPlanet2.transform.position) > stopingDistt)
+                {
+                    goingTowardsMate = true;
+
+                }
                 //myAgent.SetDestination(pos);
             }
         }
@@ -238,6 +277,7 @@ public class Animal : MonoBehaviour
         if (other.tag == "food")
         {
             hunger -= 100;
+            foodFound = false;
         }
     }
 
