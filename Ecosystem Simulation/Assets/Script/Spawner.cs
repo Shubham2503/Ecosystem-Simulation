@@ -8,6 +8,9 @@ public class Spawner : MonoBehaviour
     public GameObject terrain;
     public int numberOfObjects1; // number of objects to place
     public int numberOfObjects2; // number of objects to place
+
+    public int numOfFoodToSpawnAtInterval = 5;
+
     private int currentObjects1; // number of placed objects
     private int currentObjects2; // number of placed objects
     public GameObject objectToPlace1; // GameObject to place
@@ -44,8 +47,8 @@ public class Spawner : MonoBehaviour
         y++;
         if(y%20 == 0)
         {
-            spawnInitialPopulation(1, objectToPlace1);
-            int x = PlayerPrefs.GetInt("food", 0) + 1;
+            spawnInitialPopulation(numOfFoodToSpawnAtInterval, objectToPlace1);
+            int x = PlayerPrefs.GetInt("food", 0) + numOfFoodToSpawnAtInterval;
             PlayerPrefs.SetInt("food", x);
         }
     }
