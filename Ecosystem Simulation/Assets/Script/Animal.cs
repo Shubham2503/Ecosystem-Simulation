@@ -107,8 +107,12 @@ public class Animal : MonoBehaviour
 
         //Collider[] objs;
         objs = Physics.OverlapSphere(transform.position + Vector3.up, 10, groundLayer);
-        if(objs.Length > 0)
-        myAgent.SetDestination(objs[0].transform.position);
+        if (objs.Length > 0)
+        {
+            myAgent.SetDestination(objs[0].transform.position);
+            Vector3 targetDir = objs[0].transform.position - transform.position;
+            Debug.DrawRay(transform.position, targetDir, Color.red);
+        }
     }
 
     void FindToReprodce()
@@ -133,6 +137,9 @@ public class Animal : MonoBehaviour
         {
             exit = true;
             myAgent.SetDestination(objs2[1].transform.position);
+
+            Vector3 targetDir = objs2[1].transform.position - transform.position;
+            Debug.DrawRay(transform.position, targetDir, Color.red);
         }
     }
 
