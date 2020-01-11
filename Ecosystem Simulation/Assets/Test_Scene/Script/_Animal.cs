@@ -46,8 +46,6 @@ public class _Animal : MonoBehaviour
                     myAgent.ResetPath();
                     myAgent.isStopped = false;
                 }
-                //transform.LookAt(destination);
-                //transform.Translate(Vector3.forward * Time.deltaTime * 5.0f);
                 myAgent.SetDestination(destination);
             }
             else
@@ -55,7 +53,6 @@ public class _Animal : MonoBehaviour
 
                 destination = new Vector3(Random.Range(-10f, 10f), 0, Random.Range(-10.0f, 10.0f));
                 destination += transform.position;
-                //transform.Translate(position, Space.Self);
             }
         }
     }
