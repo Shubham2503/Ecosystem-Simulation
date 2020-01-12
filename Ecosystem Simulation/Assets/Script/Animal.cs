@@ -7,6 +7,9 @@ using UnityEngine.AI;
 public class Animal : MonoBehaviour
 {
     public double hunger = 0;
+
+    public Vector3 destination;
+
     public LayerMask groundLayer;
     public LayerMask animalLayer;
     public int senceRadius = 100;
@@ -54,7 +57,7 @@ public class Animal : MonoBehaviour
         {
             FindFood();
         }
-        else////////////////////////////////change///////////////////////////////.............................................................................
+        else
         {
             //Vector3 position = new Vector3(Random.Range(-1.0f, 1.0f), 0, Random.Range(-1.0f, 1.0f));
             //transform.Translate(position, Space.Self);
@@ -92,47 +95,27 @@ public class Animal : MonoBehaviour
 
     void FindFood()
     {
-        /*RaycastHit hit;
-        if (UnityEngine.Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, senceRadius, groundLayer))
-        {
-            myAgent.SetDestination(hit.point);
-        }
-        else
-        {
-            if (rotationDir > 5)
-                transform.Rotate(0, yAngle, 0, Space.Self);
-            else
-                transform.Rotate(0, -yAngle, 0, Space.Self);
-        }*/
-
-        //Collider[] objs;
         objs = Physics.OverlapSphere(transform.position + Vector3.up, 10, groundLayer);
-        if(objs.Length > 0)
-        myAgent.SetDestination(objs[0].transform.position);
+        if (objs.Length > 0)
+        {
+            destination = objs[0].transform.position;
+            myAgent.SetDestination(destination);
+            Vector3 targetDir = destination - transform.position;
+            Debug.DrawRay(transform.position, targetDir, Color.red);
+        }
     }
 
     void FindToReprodce()
     {
-        /*RaycastHit hit;
-        if (UnityEngine.Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, senceRadius, animalLayer))
-        {
-            exit = true;
-            myAgent.SetDestination(hit.point);
-        }
-        else
-        {
-            if (rotationDir > 5)
-                transform.Rotate(0, yAngle, 0, Space.Self);
-            else
-                transform.Rotate(0, -yAngle, 0, Space.Self);
-        }
-        */
-        
         objs2 = Physics.OverlapSphere(transform.position + Vector3.up, 10, animalLayer);
         if (objs2.Length > 1)
         {
             exit = true;
-            myAgent.SetDestination(objs2[1].transform.position);
+            destination = objs2[1].transform.position;
+            myAgent.SetDestination(destination);
+
+            Vector3 targetDir = destination - transform.position;
+            Debug.DrawRay(transform.position, targetDir, Color.red);
         }
     }
 
