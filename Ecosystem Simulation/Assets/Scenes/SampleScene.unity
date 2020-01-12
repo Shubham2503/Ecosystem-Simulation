@@ -816,7 +816,7 @@ MonoBehaviour:
   numberOfObjects1: 100
   numberOfObjects2: 50
   numOfFoodToSpawnAtInterval: 5
-  objectToPlace1: {fileID: 3727281718277207201, guid: ae799ab42662e514fb314b95c3e4d936,
+  objectToPlace1: {fileID: 8579385512905068991, guid: 943e9430fb080c94c88d474432179b1b,
     type: 3}
   objectToPlace2: {fileID: 8169145718241220019, guid: 3786445f03b1b8343be9d5c542771d25,
     type: 3}

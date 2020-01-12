@@ -64,7 +64,7 @@ public class Spawner : MonoBehaviour
             int posz = Random.Range(-terrainPosZ - terrainLength, terrainPosZ + terrainLength);
             // get the terrain height at the random position
             //float posy = Terrain.activeTerrain.SampleHeight(new Vector3(posx, 0, posz));
-            int posy = 1;
+            int posy = 0;
             // create new gameObject on random position
             GameObject newObject = (GameObject)Instantiate(obj, new Vector3(posx, posy, posz), Quaternion.identity);
             curObj += 1;
