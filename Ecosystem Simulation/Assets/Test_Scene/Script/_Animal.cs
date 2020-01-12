@@ -20,7 +20,6 @@ public class _Animal : MonoBehaviour
 
     void Update()
     {
-
         //to get angle...
         Vector3 targetDir = destination - transform.position;
         angle = Vector3.Angle(targetDir, transform.forward);
