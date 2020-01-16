@@ -42,7 +42,9 @@ public class Manager : MonoBehaviour
         {
             list.Add(animal);
             list2.Add(food);
+            if(PlayerPrefs.GetInt("CameraPosition") == 1)
             g.ShowGraph(list, numberOfNodeInGraph, (int _i) => "Day " + (_i + 1), (float _f) => "Rabbits " + Mathf.RoundToInt(_f));
+            else if(PlayerPrefs.GetInt("CameraPosition") == 2)
             g2.ShowGraph(list2, numberOfNodeInGraph, (int _i) => "Day " + (_i + 1), (float _f) => "food " + Mathf.RoundToInt(_f));
             k = 0;
         }
