@@ -510,7 +510,7 @@ PrefabInstance:
     - target: {fileID: 920356652154163315, guid: 44cbb3f1f060d4546bd96a558d7cb1ad,
         type: 3}
       propertyPath: m_TargetDisplay
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 920356652154163315, guid: 44cbb3f1f060d4546bd96a558d7cb1ad,
         type: 3}
@@ -636,6 +636,7 @@ MonoBehaviour:
   numberOfNodeInGraph: 20
   cameraOne: {fileID: 963194225}
   cameraTwo: {fileID: 1998823701}
+  cameraThree: {fileID: 1197285826}
   g: {fileID: 87684316}
   g2: {fileID: 1356983007}
 --- !u!65 &1254497058
@@ -859,11 +860,3 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1466265434}
   m_PrefabAsset: {fileID: 0}
---- !u!81 &1998823704
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1998823701}
-  m_Enabled: 1

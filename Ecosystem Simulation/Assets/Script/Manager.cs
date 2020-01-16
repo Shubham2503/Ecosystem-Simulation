@@ -12,20 +12,19 @@ public class Manager : MonoBehaviour
     public int numberOfNodeInGraph = 20;
     public GameObject cameraOne;
     public GameObject cameraTwo;
+    public GameObject cameraThree;
     private int k;
     private List<int> list;
     private List<int> list2;
 
 
     AudioListener cameraOneAudioLis;
-    AudioListener cameraTwoAudioLis;
     public Window_Graph g;
     public Window_Graph g2;
 
     void Start()
     {
         cameraOneAudioLis = cameraOne.GetComponent<AudioListener>();
-        cameraTwoAudioLis = cameraTwo.GetComponent<AudioListener>();
         animal = PlayerPrefs.GetInt("animal", 0);
         food = PlayerPrefs.GetInt("food", 0);
         list = new List<int>();
@@ -53,14 +52,22 @@ public class Manager : MonoBehaviour
     //Change Camera Keyboard
     void switchCamera()
     {
-        if (Input.GetKeyDown(KeyCode.C) || Input.GetKeyDown(KeyCode.LeftAlt) || Input.GetKeyDown(KeyCode.RightAlt))
+        if (Input.GetKeyDown(KeyCode.Z))
         {
-            cameraChangeCounter();
+            cameraPositionChange(0);
+        }
+        else if (Input.GetKeyDown(KeyCode.X))
+        {
+            cameraPositionChange(1);
+        }
+        else if (Input.GetKeyDown(KeyCode.C))
+        {
+            cameraPositionChange(2);
         }
     }
 
     //Camera Counter
-    void cameraChangeCounter()
+    void cameraChangeCounter(int val)
     {
         int cameraPositionCounter = PlayerPrefs.GetInt("CameraPosition");
         cameraPositionCounter++;
@@ -70,33 +77,33 @@ public class Manager : MonoBehaviour
     //Camera change Logic
     void cameraPositionChange(int camPosition)
     {
-        if (camPosition > 1)
-        {
-            camPosition = 0;
-        }
-
         //Set camera position database
         PlayerPrefs.SetInt("CameraPosition", camPosition);
 
-        //Set camera position 1
         if (camPosition == 0)
         {
             cameraOne.SetActive(true);
             cameraOneAudioLis.enabled = true;
 
-            cameraTwoAudioLis.enabled = false;
             cameraTwo.SetActive(false);
+            cameraThree.SetActive(false);
         }
-
-        //Set camera position 2
-        if (camPosition == 1)
+        else if (camPosition == 1)
         {
             cameraTwo.SetActive(true);
-            cameraTwoAudioLis.enabled = true;
 
             cameraOneAudioLis.enabled = false;
             cameraOne.SetActive(false);
+            cameraThree.SetActive(false);
         }
+        else
+        {
+            cameraThree.SetActive(true);
 
+            cameraOneAudioLis.enabled = false;
+            cameraOne.SetActive(false);
+            cameraTwo.SetActive(false);
+
+        }
     }
 }
