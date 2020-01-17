@@ -5,6 +5,7 @@ namespace UnityTemplateProjects
     public class _CameraScript : MonoBehaviour
     {
         public Joystick joystick;
+        public Joystick joystick2;
         class CameraState
         {
             public float yaw;
@@ -144,14 +145,26 @@ namespace UnityTemplateProjects
             }
 
             // Rotation
-            if (Input.GetMouseButton(1))
+            if (true)
             {
-                var mouseMovement = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y") * (invertY ? 1 : -1));
+                //var mouseMovement = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y") * (invertY ? 1 : -1));
 
-                var mouseSensitivityFactor = mouseSensitivityCurve.Evaluate(mouseMovement.magnitude);
-
-                m_TargetCameraState.yaw += mouseMovement.x * mouseSensitivityFactor;
-                m_TargetCameraState.pitch += mouseMovement.y * mouseSensitivityFactor;
+                if (joystick2.Vertical >= .5f)
+                {
+                    m_TargetCameraState.pitch += -joystick2.Vertical;
+                }
+                else if (joystick2.Vertical <= -.5f)
+                {
+                    m_TargetCameraState.pitch += -joystick2.Vertical;
+                }
+                if (joystick2.Horizontal >= .5f)
+                {
+                    m_TargetCameraState.yaw += joystick2.Horizontal;
+                }
+                else if (joystick2.Horizontal <= -.5f)
+                {
+                    m_TargetCameraState.yaw += joystick2.Horizontal;
+                }
             }
 
             // Translation
