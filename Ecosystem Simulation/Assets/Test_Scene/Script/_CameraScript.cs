@@ -4,8 +4,10 @@ namespace UnityTemplateProjects
 {
     public class _CameraScript : MonoBehaviour
     {
+        public bool isMobileController = false;
         public Joystick joystick;
         public Joystick joystick2;
+        public GameObject canvas;
         class CameraState
         {
             public float yaw;
@@ -80,18 +82,20 @@ namespace UnityTemplateProjects
 
         Vector3 GetInputTranslationDirection()
         {
-            
+
             Vector3 direction = new Vector3();
-            if(joystick.Horizontal >= -.5f)
-                direction += joystick.Horizontal * Vector3.right * 2f;
-            else if(joystick.Horizontal <= -.5f)
-                direction += joystick.Horizontal * Vector3.right * 2f;
+            if (isMobileController)
+            {
+                if (joystick.Horizontal >= -.5f)
+                    direction += joystick.Horizontal * Vector3.right * 2f;
+                else if (joystick.Horizontal <= -.5f)
+                    direction += joystick.Horizontal * Vector3.right * 2f;
 
-            if (joystick.Vertical >= .5f)
-                direction += joystick.Vertical * Vector3.forward * 2f;
-            else if (joystick.Vertical <= -.5f)
-                direction += joystick.Vertical * Vector3.forward * 2f;
-
+                if (joystick.Vertical >= .5f)
+                    direction += joystick.Vertical * Vector3.forward * 2f;
+                else if (joystick.Vertical <= -.5f)
+                    direction += joystick.Vertical * Vector3.forward * 2f;
+            }
 
             if (Input.GetKey(KeyCode.W))
             {
@@ -122,6 +126,15 @@ namespace UnityTemplateProjects
 
         void Update()
         {
+            if(!isMobileController)
+            {
+                canvas.SetActive(false);
+            }
+            else
+            {
+                canvas.SetActive(true);
+            }
+
             // Exit Sample  
             if (Input.GetKey(KeyCode.Escape))
             {
@@ -145,26 +158,29 @@ namespace UnityTemplateProjects
             }
 
             // Rotation
-            if (true)
-            {
-                //var mouseMovement = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y") * (invertY ? 1 : -1));
 
+            if (isMobileController)
+            {
                 if (joystick2.Vertical >= .5f)
-                {
                     m_TargetCameraState.pitch += -joystick2.Vertical;
-                }
                 else if (joystick2.Vertical <= -.5f)
-                {
                     m_TargetCameraState.pitch += -joystick2.Vertical;
-                }
+                
                 if (joystick2.Horizontal >= .5f)
-                {
                     m_TargetCameraState.yaw += joystick2.Horizontal;
-                }
+                
                 else if (joystick2.Horizontal <= -.5f)
-                {
                     m_TargetCameraState.yaw += joystick2.Horizontal;
-                }
+                
+            }
+            else if (Input.GetMouseButton(1))
+            {
+                var mouseMovement = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y") * (invertY ? 1 : -1));
+
+                var mouseSensitivityFactor = mouseSensitivityCurve.Evaluate(mouseMovement.magnitude);
+
+                m_TargetCameraState.yaw += mouseMovement.x * mouseSensitivityFactor;
+                m_TargetCameraState.pitch += mouseMovement.y * mouseSensitivityFactor;
             }
 
             // Translation
