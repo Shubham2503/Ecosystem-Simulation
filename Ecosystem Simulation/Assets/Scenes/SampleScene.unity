@@ -235,6 +235,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 3855333233759228807, guid: 7025379524db1f94a8c515bfb18ce9a9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3855333233759228859, guid: 7025379524db1f94a8c515bfb18ce9a9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -607,7 +612,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff3f58f785758424492cdb8e4d9d085a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isMobileController: 1
+  isMobileController: 0
   joystick: {fileID: 738210981}
   joystick2: {fileID: 738210982}
   canvas: {fileID: 738210980}

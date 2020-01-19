@@ -30,7 +30,7 @@ public class Manager : MonoBehaviour
         list = new List<int>();
         list2 = new List<int>();
 
-        cameraPositionChange(PlayerPrefs.GetInt("CameraPosition"));
+        cameraPositionChange(0);
     }
 
     void Update()
