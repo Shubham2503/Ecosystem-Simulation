@@ -11,6 +11,8 @@ public class Manager : MonoBehaviour
     public int food;
     public int numberOfNodeInGraph = 20;
     public GameObject cameraOne;
+    public GameObject UI_Camera_Canvas;
+    public GameObject UI_Camera_Canvas2;
     public GameObject cameraTwo;
     public GameObject cameraThree;
     private int k;
@@ -30,7 +32,7 @@ public class Manager : MonoBehaviour
         list = new List<int>();
         list2 = new List<int>();
 
-        cameraPositionChange(PlayerPrefs.GetInt("CameraPosition"));
+        cameraPositionChange(0);
     }
 
     void Update()
@@ -87,22 +89,28 @@ public class Manager : MonoBehaviour
             cameraOne.SetActive(true);
             cameraOneAudioLis.enabled = true;
 
+            UI_Camera_Canvas.SetActive(false);
+            UI_Camera_Canvas2.SetActive(false);
             cameraTwo.SetActive(false);
             cameraThree.SetActive(false);
         }
         else if (camPosition == 1)
         {
+            UI_Camera_Canvas.SetActive(true);
             cameraTwo.SetActive(true);
 
             cameraOneAudioLis.enabled = false;
+            UI_Camera_Canvas2.SetActive(false);
             cameraOne.SetActive(false);
             cameraThree.SetActive(false);
         }
         else
         {
+            UI_Camera_Canvas2.SetActive(true);
             cameraThree.SetActive(true);
 
             cameraOneAudioLis.enabled = false;
+            UI_Camera_Canvas.SetActive(false);
             cameraOne.SetActive(false);
             cameraTwo.SetActive(false);
 
