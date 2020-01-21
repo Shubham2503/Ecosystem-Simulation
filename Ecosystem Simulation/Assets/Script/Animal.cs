@@ -95,27 +95,52 @@ public class Animal : MonoBehaviour
 
     void FindFood()
     {
-        objs = Physics.OverlapSphere(transform.position + Vector3.up, 10, groundLayer);
-        if (objs.Length > 0)
+        if (destination == Vector3.zero || Vector3.Distance(transform.position, destination) < 0.1)
         {
-            destination = objs[0].transform.position;
-            myAgent.SetDestination(destination);
-            Vector3 targetDir = destination - transform.position;
-            Debug.DrawRay(transform.position, targetDir, Color.red);
+            objs = Physics.OverlapSphere(transform.position + Vector3.up, 10, groundLayer);
+            if (objs.Length > 0)
+            {
+                float mindist = 1000;
+                foreach (Collider i in objs)
+                {
+                    if (Vector3.Distance(transform.position, i.transform.position) < mindist)
+                    {
+                        mindist = Vector3.Distance(transform.position, i.transform.position);
+                        destination = i.transform.position;
+                    }
+                }
+                //destination = objs[0].transform.position;
+                myAgent.SetDestination(destination);
+                Vector3 targetDir = destination - transform.position;
+                Debug.DrawRay(transform.position, targetDir, Color.red);
+            }
+            destination = Vector3.zero;
         }
     }
 
     void FindToReprodce()
     {
-        objs2 = Physics.OverlapSphere(transform.position + Vector3.up, 10, animalLayer);
-        if (objs2.Length > 1)
+        if (destination == Vector3.zero || Vector3.Distance(transform.position, destination) < 0.1)
         {
-            exit = true;
-            destination = objs2[1].transform.position;
-            myAgent.SetDestination(destination);
+            objs2 = Physics.OverlapSphere(transform.position + Vector3.up, 10, animalLayer);
+            if (objs2.Length > 1)
+            {
+                exit = true;
+                float mindist = 1000;
+                foreach (Collider i in objs2)
+                {
+                    if (Vector3.Distance(transform.position, i.transform.position) < mindist && Vector3.Distance(transform.position, i.transform.position) > 0)
+                    {
+                        mindist = Vector3.Distance(transform.position, i.transform.position);
+                        destination = i.transform.position;
+                    }
+                }
+                //destination = objs2[1].transform.position;
+                myAgent.SetDestination(destination);
 
-            Vector3 targetDir = destination - transform.position;
-            Debug.DrawRay(transform.position, targetDir, Color.red);
+                Vector3 targetDir = destination - transform.position;
+                Debug.DrawRay(transform.position, targetDir, Color.red);
+            }
         }
     }
 
