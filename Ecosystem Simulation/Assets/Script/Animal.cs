@@ -115,7 +115,7 @@ public class Animal : MonoBehaviour
             myAgent.SetDestination(destination);
 
             Vector3 targetDir = destination - transform.position;
-            Debug.DrawRay(transform.position, targetDir, Color.red);
+            Debug.DrawRay(transform.position, targetDir, Color.blue);
         }
     }
 
